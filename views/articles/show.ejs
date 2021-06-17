@@ -16,11 +16,17 @@
         <h1 class="display-1 mb-1">
             <%= article.title %>
         </h1>
-        <h6 class="card-subtitle mb-2 text-muted">
-            <%= article.createdAt.toLocaleString() %>
-        </h6>
+        <div>
+            <h6 class="card-subtitle mb-2 text-muted">
+                <%= article.createdAt.toLocaleString() %>
+            </h6>
+        </div>
         <a class="btn btn-info" href="/" role="button">All Articles</a>
         <a class="btn btn-warning" href="/articles/edit/<%= article.id %> " role="button">Edit</a>
+
+        <div>
+            <%- article.sanitizedHtml %>
+        </div>
     </div>
 </body>
 

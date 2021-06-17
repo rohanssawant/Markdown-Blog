@@ -12,8 +12,10 @@ router.get("/:id", async (req, res) => {
   res.render("articles/show", { article });
 });
 
-router.get("/edit/:id", (req, res) => {
-  res.send(`inside /articles/edit/id${req.params.id}`);
+http: router.get("/edit/:id", async (req, res) => {
+  // res.send(`inside /articles/edit/id${req.params.id}`);
+  const article = await Article.findById(req.params.id);
+  res.render("articles/edit", { article });
 });
 
 router.post("/", async (req, res) => {
@@ -37,4 +39,19 @@ router.delete("/:id", async (req, res) => {
   res.redirect("/");
 });
 
-module.exports = router;
+router.put("/:id", async (req, res) => {
+  let article = await Article.findById(req.params.id);
+  const { title, description, markdown } = req.body;
+  (article.title = title),
+    (article.description = description),
+    (article.markdown = markdown);
+  try {
+    article = await article.save();
+    res.redirect(`/articles/${article.id}`);
+  } catch (error) {
+    console.log(error);
+    res.render("articles/edit/", { article });
+  }
+});
+
+http: module.exports = router;
