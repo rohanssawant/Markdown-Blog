@@ -35,6 +35,6 @@ app.get("/", async (req, res) => {
 app.use("/articles", articleRouter);
 
 const PORT = 2001;
-app.listen(PORT || process.env.PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`SERVER STARTED AT PORT ${PORT}`);
 });
